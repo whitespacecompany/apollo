@@ -1,0 +1,28 @@
+language: node_js
+node_js:
+- 10.9.0
+services:
+- docker
+install:
+- npm install
+script:
+- npm test
+env:
+  global:
+  - secure: BxCTVud6I4Be5E4ItOrV6/g0bMIveC4Z1hAwpUCN4PQ07BRZMCUbQIDxBbrxBcQsY7uDEG6HxgC+1dZe3IDcPE42IY9Hun2MSDkHLSQhRa0FZHfam2g7y3y2pOhZTf+2XO6tpDLHhh+7JVxuYEZ5BplFPoX1+sLP51E+q06yExDLc95OMgA4N+2Ge9ogKQ22XUpLUsYz4qtIIGqTeue5YVAlVG3swF7sv7o0IK1ZScmz2zHDo6y4NCykdthAHuxqM9szCYLx7FIqC8+F2G6X0UtC6PkXZGsUNSko31zEMdVRQuTdJXqsLR/zLZ+2BCicTP5KNB1H833NRZT7qsrfi9t3ckcDvetVe4vTNxfJQcrY2pWQ27E1t+3AWSCicPc8wcGYrxWlfslmVYXq96LhvMiTDB5zbNn1vosGgOeMjoAVo30HVqb8zxKavSTMHcl1GAdA6OdCV6grm10VA9A8Hjkghsj45xWKln9EDhdC3Snp4eb14D5HnQyXTKVXM/fb999bPUAR21VQsarSHFZy6fb12+vLrR4Gnz/MCjuMdRJSxpTQunfxNUaidhkVeh2tdoc8JHUw9+L00cWvxl47/EpppzFrA/qmqmNF0QymNbb4h5tBbiw30hka7FKOVdRwd9CEipqNxK9J+Z831Dz3O9gqOYoLcfGQinpogSSNU5o=
+deploy:
+- provider: script
+  script: bash ./script/deploy.sh development
+  skip_cleanup: true
+  on:
+    branch: development
+- provider: script
+  script: bash ./script/deploy.sh uat
+  skip_cleanup: true
+  on:
+    branch: uat
+- provider: script
+  script: bash ./script/deploy.sh production
+  skip_cleanup: true
+  on:
+    branch: master
